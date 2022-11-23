@@ -7,7 +7,7 @@ const serverPackets = {
     tcpHandshake: {
         id: 1,
         callback: (client) => {
-            //console.log("[server] calling callback for: tcpHandshake")
+            console.log("[server] calling callback for: tcpHandshake")
             let packet = new Packet({'id': 1}); //Тип пакета
             packet.writeString('Welcome to the server!'); // Сообщение для клиента
             packet.writeString(client.id); // Его id
@@ -17,7 +17,7 @@ const serverPackets = {
     }, tcpRegistering: {
         id: 2,
         callback: (client, result) => {
-            //console.log("[server] calling callback for: tcpRegistering")
+            console.log("[server] calling callback for: tcpRegistering")
             let packet = new Packet({'id': 2}); //Тип пакета
             packet.writeBool(result);
             client.tcp.sendData(packet);
@@ -30,7 +30,7 @@ const serverPackets = {
     }, joinRoom: {
         id: 4,
         callback: (client, successfullyConnected=false,  isHost=false, roomId="") => {
-            //console.log("[server] calling callback for: joinRoom")
+            console.log("[server] calling callback for: joinRoom")
             let packet = new Packet({'id': 4}); //Тип пакета
             packet.writeBool(successfullyConnected);
             packet.writeBool(isHost);
@@ -43,7 +43,7 @@ const serverPackets = {
     }, roomsInfo: {
         id: 5,
         callback: (client, rooms) => {
-            //console.log("[server] calling callback for: roomsInfo")
+            console.log("[server] calling callback for: roomsInfo")
             let packet = new Packet({'id': 5}); //Тип пакета
             packet.writeInt(rooms.length);
             for(let i=0;i<rooms.length;i++){
@@ -55,7 +55,7 @@ const serverPackets = {
     }, updateRoom: {
         id: 6,
         callback: (client) => {
-            //console.log("[server] calling callback for: updateRoom")
+            console.log("[server] calling callback for: updateRoom")
             let packet = new Packet({'id': 6}); //Тип пакета
             let room = client.room;
             packet.writeInt(room.players.length);
@@ -72,7 +72,7 @@ const serverPackets = {
     }, newChatMessage: {
         id: 7,
         callback: (client, message) => {
-            //console.log("[server] calling callback for: newChatMessage")
+            console.log("[server] calling callback for: newChatMessage")
             let packet = new Packet({'id': 7}); //Тип пакета
             packet.writeString(message,true)
             client.tcp.sendData(packet);
